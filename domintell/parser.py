@@ -64,9 +64,9 @@ class DomintellParser(object):
         
         'APPINFO'
         module_type = data[0:3]
-        serial_number = data[3:9]
+        serial_number = data[3:9].strip()
         data_type = data[9:10]
-        data_string = data[10:]
+        data_string = data[10:].strip()
 
         i = ['INF', '!! ']
 

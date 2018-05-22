@@ -18,7 +18,7 @@ class GenericAOStatusMessage(domintell.Message):
         self.outputCount = outputCount
         self.serialNumber = None
         self.dataType = None
-        self.outputs = []
+        self.outputs = {}
         for i in range(0, self.outputCount):
             self.outputs[i] = 0
 
@@ -26,13 +26,11 @@ class GenericAOStatusMessage(domintell.Message):
         """
         :return: None
         """
-        assert isinstance(dataString, str)
-
         self.serialNumber = serialNumber
         self.dataType = dataType
 
         for output in range(0, self.outputCount):
-            self.outputs[output] = int(dataString[output * 2: 2].strip(), 16)
+            self.outputs[output] = int(dataString[output * 2: (output * 2) + 2].strip(), 16)
 
     def to_json(self):
         """
@@ -41,7 +39,7 @@ class GenericAOStatusMessage(domintell.Message):
         json_dict = self.to_json_basic()
         for output in range(0, self.outputCount):
             if output < len(self.outputs):
-                json_dict['output{}'.format(output)] = self.outputs[output]
+                json_dict['output{}'.format(output + 1)] = self.outputs[output]
         return json.dumps(json_dict)
 
     def is_on(self, output):

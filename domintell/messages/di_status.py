@@ -28,8 +28,6 @@ class GenericDIStatusMessage(domintell.Message):
         """
         :return: None
         """
-        assert isinstance(dataString, str)
-
         self.serialNumber = serialNumber
         self.dataType = dataType
 
@@ -49,3 +47,6 @@ class GenericDIStatusMessage(domintell.Message):
             if input < len(self.inputs):
                 json_dict['input{}'.format(input)] = self.inputs[input]
         return json.dumps(json_dict)
+
+    def get_values(self):
+        return self.inputs

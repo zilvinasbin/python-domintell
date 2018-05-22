@@ -8,6 +8,7 @@ import json
 import domintell
 from domintell.messages import GenericDIStatusMessage
 from decimal import Decimal
+from domintell.utils import DecimalEncoder
 
 DTSC_COMMAND_CODE = "TSB"
 
@@ -51,10 +52,10 @@ class DTSCStatusMessage(GenericDIStatusMessage):
             if input < len(self.inputs):
                 json_dict['input{}'.format(input)] = self.inputs[input]
         
-        json_dict['curret'] = self.current
+        json_dict['current'] = DecimalEncoder().encode(self.current)
         json_dict['mode'] = self.mode
-        json_dict['setPoint'] = self.setPoint
-        json_dict['range'] = self.range
+        json_dict['setPoint'] = DecimalEncoder().encode(self.setPoint)
+        json_dict['range'] = DecimalEncoder().encode(self.range)
         return json.dumps(json_dict)
 
 

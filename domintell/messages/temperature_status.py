@@ -59,7 +59,7 @@ class GenericTemperaturetatusMessage(domintell.Message):
         :return: str
         """
         json_dict = self.to_json_basic()
-        json_dict['curret'] = DecimalEncoder().encode(self._current)
+        json_dict['current'] = DecimalEncoder().encode(self._current)
         json_dict['mode'] = self._mode
         json_dict['set_point'] = DecimalEncoder().encode(self._set_point)
         json_dict['range'] = DecimalEncoder().encode(self._range)

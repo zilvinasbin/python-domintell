@@ -1,5 +1,8 @@
 *.pyc
+credentials.py
 build
 dist
-python_velbus.egg-info
+python_domintell.egg-info
 site-packages
+modules.js
+modules.pkl
