@@ -54,7 +54,7 @@ class DomintellParser(object):
         assert len(data) > 0
         assert len(data) >= domintell.MINIMUM_MESSAGE_SIZE
 
-        self.logger.info("Processing message [%s]", data)
+        self.logger.info("Processing message [%s]", data.strip('\r\n '))
         if len(data) > domintell.MAXIMUM_MESSAGE_SIZE:
             self.logger.warning("Domintell message are maximum %s chars, this one is %s", str(
                 domintell.MAXIMUM_MESSAGE_SIZE), str(len(data)))

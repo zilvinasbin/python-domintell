@@ -41,6 +41,6 @@ logging.info('Starting scan')
 controller.scan(None)
 
 logging.info('Starting sleep')
-time.sleep(100)
+time.sleep(1000)
 logging.info('Exiting ...')
 controller.stop()
