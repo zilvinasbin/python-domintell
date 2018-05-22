@@ -1,21 +1,19 @@
-## python-velbus: A python library to control the Velbus home automation system
+## python-domintell: A python library to control the Domintell home automation system
 
-This library was created to support the Velbus protocol in my home automation efforts.
+This library was created to support Domintell protocol in [home assisstant](http://home-assistant.io). It is based on [python-velbus](https://github.com/thomasdelaet/python-velbus) library by [Thomas Delaet](https://github.com/thomasdelaet).
 
-It is currently being used by the Velbus component in [home assisstant](http://home-assistant.io) but can also be used indepenently.
+It is currently being used by the Domintell component in [home assisstant](http://home-assistant.io) but can also be used indepenently.
 
-The latest version of the library is *2.0.12* and it is published as a python package on [pypi](https://pypi.python.org/pypi/python-velbus)
+The latest version of the library is *0.0.1* and it is published as a python package on [pypi](https://pypi.python.org/pypi/python-domintell)
 
-I would like to extend this module to support all Velbus modules and offer higher-level functionality such as auto-discovery, so feel free to submit pull requests or log issues through [github](http://www.github.com/thomasdelaet/python-velbus) for functionality you like to have included.
-
-API documentation is available [here](http://python-velbus.readthedocs.io/en/latest/)
+API documentation is not yet available.
 
 # Example usage
 
-The library currently only supports a serial connection to the Velbus controller (either through USB module or through RS-232 interface). In order to use the library, you need to first initialize the controller and can then send and receive messages on the Velbus. The library currently does not validate if a message is supported by a certain module (e.g., you can send a blind up message to a relay)
+The library currently only supports a UDP communicatin via DETH02 Domintell module, it can be easily modified to support RS-232 intiarface (domintell light protocol). In order to use the library, you need to first initialize the controller and can then send and receive messages on the Domintell.
 
 ```python
-import velbus
+import domintell
 import time
 
 # serial (or USB over serial) device connected to Velbus controller

@@ -1,0 +1,16 @@
+"""
+:author: Zilvinas Binisevicius <zilvinas@binis.me>
+"""
+import domintell
+
+
+class LoginRequest(domintell.Command):
+    """
+        send: LOGIN<password_hash>
+    """
+    def __init__(self, password_hash):
+        domintell.Command.__init__(self, "_LOGIN_", "_LOGIN_")
+        self._password = password_hash
+
+    def command(self, moduleType=None, serialNumber=None, dataType=None, value=None):
+        return "LOGIN" + self._password

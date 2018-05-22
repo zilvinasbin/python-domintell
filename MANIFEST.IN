@@ -1,3 +1,3 @@
-recursive-include velbus *.py
+recursive-include domintell *.py
 include README.txt
 include setup.py

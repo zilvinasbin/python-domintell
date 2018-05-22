@@ -3,15 +3,15 @@ from setuptools import setup
 with open('README.md') as file:
     long_description = file.read()
 
-setup(name='python-velbus',
-      version='2.0.15',
-      url='https://bitbucket.org/tdelaet/python-velbus/',
+setup(name='python-domintell',
+      version='0.0.1',
+      url='https://github.com/shamanenas/python-domintell',
       license='MIT',
-      author='Thomas Delaet',
+      author='Zilvinas Binisevicius',
       install_requires=["pyserial==3.3"],
-      author_email='thomas@delaet.org',
-      description="Python Library for the Velbus protocol",
+      author_email='zilvinas@binis.me',
+      description="Python Library for the Domintell protocol",
       long_description=long_description,
-      packages=['velbus', 'velbus.connections', 'velbus.messages'],
+      packages=['domintell', 'domintell.utils', 'domintell.connections', 'domintell.messages', 'domintell.modules'],
       platforms='any',
      )
