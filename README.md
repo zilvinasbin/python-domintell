@@ -56,13 +56,6 @@ The following Domitell modules are currently supported by this library:
 
 | Module name | Description | Status | Comments |
 | ----------- | ----------- | ------ | -------- |
-| VMB6IN | 6 channel input module | SUPPORTED | All messages are supported |
-| VMB7IN | 7 channel input module | SUPPORTED | Only messages from VMB6IN are supported |
-| VMB4RYLD | 4 channel relay module | SUPPORTED | All messages are supported |
-| VMB4RYNO | 4 channel relay module | SUPPORTED | All messages are supported |
-| VMB1RS | Serial interface | SUPPORTED | All messages are supported |
-| VMB1USB | USB configuration module | SUPPORTED | All messages are supported |
-| VMBRSUSB | Configuration module with USB and RS-232 interface | SUPPORTED | All messages are supported |
 | DISM4 | Control of 4 inputs (buttons) | SUPPORTED | All messages are supported |
 | DISM8 | Control of 8 inputs (buttons) | SUPPORTED | All messages are supported |
 | DPBU01 | 1 button module | SUPPORTED | All messages are supported |
