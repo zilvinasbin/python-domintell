@@ -7,7 +7,7 @@ Port to domintell
 import string
 import json
 import domintell
-from module_directory import MODULE_DIRECTORY
+from domintell.module_directory import MODULE_DIRECTORY
 
 class Module(object):
     """
@@ -112,7 +112,46 @@ class Module(object):
         :return: int
         """
         return 1
+    
+    def turn_on(self):
+        raise NotImplementedError
+    
+    def turn_off(self):
+        raise NotImplementedError
+    
+    def is_on(self, channel):
+        raise NotImplementedError
 
+    
+    def get_status(self):
+        message = domintell.ModuleStatusRequest(self.get_module_code(), self.get_serial_number())
+        self._controller.send(message)
+        
+    def get_io_type(self):
+        """
+        Get Input Output type
+        
+        Returns:
+         ai - analog input
+         ao - analog output
+         di - digital input
+         do - digital output
+         t  - temperature controller
+         unk - unknown
+        """
+        if self._module_code() in MODULE_DIRECTORY.keys(): 
+            return MODULE_DIRECTORY[self._module_code()]['io']
+        return "unk"
+
+    def is_dimmer(self):
+        """
+        Check if module is a dimmer
+            :param self: 
+        """   
+        if self.get_io_type() == 'ao':
+            return True
+        return False
+    
     def _load(self):
         message = domintell.ModuleStatusRequest(self.get_module_code(), self._serial_number)
         message.channels = list(range(0, self.number_of_channels()))

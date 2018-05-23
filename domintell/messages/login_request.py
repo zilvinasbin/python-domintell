@@ -13,4 +13,10 @@ class LoginRequest(domintell.Command):
         self._password = password_hash
 
     def command(self, moduleType=None, serialNumber=None, dataType=None, value=None):
-        return "LOGIN" + self._password
+        # TODO FIXME
+        # return "LOGIN" + self._password
+        return self._password
+
+    def is_binary(self):
+        return True
+

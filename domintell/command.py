@@ -5,8 +5,7 @@ Port for Domintell
 import json
 import base64
 import domintell
-from module_directory import get_point_id
-
+from domintell.module_directory import get_point_id
 
 class Command(domintell.Message):
     # pylint: disable-msg=R0904

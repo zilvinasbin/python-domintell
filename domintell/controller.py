@@ -129,16 +129,7 @@ class Controller(object):
             module_type = message.moduleType
             serial_number = message.serialNumber
             # print(domintell.ModuleRegistry)
-            if module_type in domintell.ModuleRegistry:
-                # we support this module
-                if serial_number in self._modules:
-                    # serial numbeer already registered
-                    pass
-                else:
-                    module = domintell.ModuleRegistry[module_type](serial_number, self)
-                    self._modules[serial_number] = module
-            else:
-                self.logger.warning("!! Module " + module_type + " is not yet supported. !!")
+            self.add_module(module_type, serial_number)
         elif isinstance(message, domintell.ControllMessage):
             if message.moduleType == 'END APPINFO':
                 # all APPINFO received
@@ -146,12 +137,41 @@ class Controller(object):
                 # TODO move to config
                 with open('modules.js', 'w') as f:
                     m = self._modules
-                    # move encoding into config
-                    json.dump(m, f, cls=ModuleJSONEncoder, encoding='iso8859_13')
+                    # move encoding into config , encoding='iso8859_13'
+                    json.dump(m, f, cls=ModuleJSONEncoder)
         
         # forward message to listeners
         for subscriber in self.__subscribers:
             subscriber(message)
+
+    def add_module(self, module_type, serial_number):
+        """
+        Create and add device
+            :param self: 
+            :param module_type: 
+            :param serial_number: 
+        """  
+        if module_type in domintell.ModuleRegistry:
+            # we support this module
+            if serial_number in self._modules:
+                # serial numbeer already registered
+                pass
+            else:
+                module = domintell.ModuleRegistry[module_type](serial_number, self)
+                self._modules[serial_number] = module
+            return self._modules[serial_number]
+        else:
+            self.logger.warning("!! Module " + module_type + " is not yet supported. !!")
+            return None
+    
+    def get_module(self, serial_number):
+        """
+        Get device by serial number
+        """
+        if serial_number in self._modules:
+            return self._modules[serial_number]
+        else:
+            return None
 
     def stop(self):
         """

@@ -80,4 +80,7 @@ class Message(object):
         :return: None
         """
         raise domintell.ParserError(self.__class__.__name__ + " " + message)
+    
+    def is_binary(self):
+        return False
 

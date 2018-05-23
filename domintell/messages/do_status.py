@@ -48,3 +48,6 @@ class GenericDOStatusMessage(domintell.Message):
     
     def get_values(self):
         return self.outputs
+    
+    def is_on(self, channel):
+        return self.outputs[channel - 1] == 1
