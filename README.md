@@ -13,42 +13,46 @@ API documentation is not yet available.
 The library currently only supports a UDP communicatin via DETH02 Domintell module, it can be easily modified to support RS-232 intiarface (domintell light protocol). In order to use the library, you need to first initialize the controller and can then send and receive messages on the Domintell.
 
 ```python
-import domintell
 import time
+import logging
+import sys
+import domintell
+import credentials
+import os, sys
 
-# serial (or USB over serial) device connected to Velbus controller
-port = "/dev/ttyACM0"
+def _on_message(message):
+    print('received message')
+    print(message)
 
-connection = velbus.VelbusUSBConnection(port)
-controller = velbus.Controller(connection)
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
+
+# UDP, Serial (or USB over serial) connection to Domintell controller
+host = '192.168.0.1:17481'
+
+controller = domintell.Controller(host) 
 controller.subscribe(_on_message)
 
-# set module address
-module_address = 0xdc
-message = velbus.SwitchRelayOnMessage(module_address)
+logging.info('LOGIN')
+controller.login(credentials.host['SECRET'])
 
-channel_number = 1
+time.sleep(10)
+logging.info('Starting scan')
+controller.scan(None)
 
-message.relay_channels = [channel_number]
+logging.info('Going to sleep')
+time.sleep(100)
+logging.info('Exiting ...')
+controller.stop()
 
-controller.send(message)
-
-def _on_message(received_message):
-    print("Velbus message received")
-    print(received_message.address)
-
-time.sleep(5)
-
-connection.stop()
 ```
 
 # Installation
 
-You can install the library with pip (*pip install python-velbus*) or by checking out the [github](https://github.com/thomasdelaet/python-velbus) repository and running *python setup.py install* at the root of the repository.
+You can install the library with pip (*pip install python-domintell*) or by checking out the [github](https://github.com/shamanenas/python-domintell) repository and running *python setup.py install* at the root of the repository.
 
 # Supported modules
 
-The following Velbus modules are currently supported by this library:
+The following Domitell modules are currently supported by this library:
 
 | Module name | Description | Status | Comments |
 | ----------- | ----------- | ------ | -------- |
@@ -59,18 +63,44 @@ The following Velbus modules are currently supported by this library:
 | VMB1RS | Serial interface | SUPPORTED | All messages are supported |
 | VMB1USB | USB configuration module | SUPPORTED | All messages are supported |
 | VMBRSUSB | Configuration module with USB and RS-232 interface | SUPPORTED | All messages are supported |
+| DISM4 | Control of 4 inputs (buttons) | SUPPORTED | All messages are supported |
+| DISM8 | Control of 8 inputs (buttons) | SUPPORTED | All messages are supported |
+| DPBU01 | 1 button module | SUPPORTED | All messages are supported |
+| DPBU02 | 2 button module | SUPPORTED | All messages are supported |
+| DPBU04 | 4 button module | SUPPORTED | All messages are supported |
+| DPBU06 | 6 button module | SUPPORTED | All messages are supported |
+| DBIR01 | 8 relay output module | SUPPORTED | All messages are supported |
+| DTRP01 | Output card for the control of up to 4 trip switches | SUPPORTED | All messages are supported |
+| DTRP02 | Output card for the control of 2 x 2 inverted trip switches |SUPPORTED | All messages are supported |
+| DDIM01 | Control module for up to 8 dimmers | SUPPORTED | All messages are supported |
+| DTEM01 | Temperature sensor module. Allows the connection of the temperature sensor | SUPPORTED | Only basic messages |
+| DTEM02 | Temperature sensor module. Allows the connection of the temperature sensor | SUPPORTED | Only basic messages |
+| DDIR01 | Infrared Sensor | NOT SUPPORTED | No plans to support |
+| DTSC0x | TFT back-lit color touchscreen | SUPPORTED | Only temperature messages are supported |
+| DMOV01 | Movement sensor | SUPPORTED | All messages are supported |
+| DLCD01 | LCD | NOT SUPPORTED |  |
+| DTRV01 | 4 outputs control module. For the control of shutters, valves, motors, etc | SUPPORTED | All messages are supported |
+| DLED01 | 4 outputs led control module | SUPPORTED | All messages are supported |
+| DTRVBT01 | Single output card controlling motors, valves, shutters or Velux with low tension between 12 to 24Vdc | SUPPORTED | All messages are supported |
+| DAMPLI01 |  4 zones stereo audio amplifi er  | NOT SUPPORTED | No plans to implement |
+| VAR | Variable | SUPPORTED | All messages are supported |
+| SYS | System variable | SUPPORTED | All messages are supported |
+| DOUT10V01 | 0 - 10Vdc output module | SUPPORTED | All messages are supported |
+| DLCD01 | LCD panel | NOT SUPPORTED | |
+| DFAN01 | Fan coil controller | NOT SUPPORTED | |
+| DMR01 | Output card with 5 x 250 V/3 A monopolar relays. | SUPPORTED | All messages are supported |
+| DIN10V01 | 0 - 10Vdc input module | NOT SUPPORTED ||
 
 # Adding support for other modules
 
-The [velbus website](http://www.velbus.eu) contains an overview of the different available modules and their protocol documentation. In order to add support for an additional module, read through the protocol documemntation and add support for missing messages (many messages are shared between modules so make sure to check if a message already exists or not)
+The [Domintell website](http://www.domintell.com) contains an overview of the different available modules and their protocol documentation. In order to add support for an additional module, read through the protocol documemntation and add support for missing messages (many messages are shared between modules so make sure to check if a message already exists or not)
 
 Steps to add support for an additional module:
 
-- [ ] Look up the protocol documentation of the module you want to include at the [velbus website](https://www.velbus.eu/products/): Select the module, go to *Downloads* and search for the info sheet with protocol information.
+- [ ] Look up the protocol documentation of the module you want to include at the [Domintell website](https://www.domintell.eu/).
 - [ ] Go through the messages directory and look for messages in the protocol information sheet that are not yet supported. Create a new file in the *messages* folder for each unsupported message. Every new message should inherit from the *Message* object and reuse common functionality.
 - [ ] Implement constructor method for each new message
 - [ ] Implement the *populate* and *data_to_binary* methods for each new message
-- [ ] If the message has other than low priority or no RTR set (which are defaults), then re-implement *set_defaults* method
 - [ ] Add new messages to the *__init__.py* file in the *messages* folder
 - [ ] Test and iterate
 - [ ] Update the Supported modules section of the *README.md* file
@@ -78,9 +108,9 @@ Steps to add support for an additional module:
 
 # Further development
 
-The library currently offers only the lowest level of functionality: sending and receiving messages to modules. I plan to extend this library with more higher-level functionality such as:
+The library currently offers only the lowest level of functionality: sending and receiving messages to modules:
 
 - [ ] Modeling modules and their supported functions as entities
 - [ ] Only allowing to send supported messages to modules
-- [ ] Auto-discovery of modules
+- [*] Auto-discovery of modules
 - [ ] Exposing the velbus controller as an external API so it can be shared between different consumers

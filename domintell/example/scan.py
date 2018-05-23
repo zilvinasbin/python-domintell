@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Example code to scan Velbus and return list of installed modules.
+Example code to scan Domintell and return list of installed modules.
 """
 
 import time
