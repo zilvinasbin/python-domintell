@@ -36,7 +36,7 @@ class GenericDIStatusMessage(domintell.Message):
         mask = int(dataString[0:2].strip(), 16)
 
         for input in range(0, self.inputCount):
-            self.inputs[input] = 1 if (mask & (input + 1)) else 0
+            self.inputs[input] = 1 if (mask & pow(2, input)) == mask else 0
 
     def to_json(self):
         """
