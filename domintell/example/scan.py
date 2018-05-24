@@ -7,8 +7,8 @@ import time
 import logging
 import sys
 import domintell
-import credentials
 import os, sys
+from config import host
 
 def _on_message(message):
     print('received message')
@@ -26,14 +26,13 @@ host = {
 """
 
 #pylint: disable-msg=C0103
-host = credentials.host['ADDRESS']
-logging.info('Configuring controller')
+logging.info('Configuring controller for {}'.format(host['ADDRESS']))
 
-controller = domintell.Controller(host) 
+controller = domintell.Controller(host['ADDRESS']) 
 controller.subscribe(_on_message)
 
 logging.info('LOGIN')
-controller.login(credentials.host['SECRET'])
+controller.login(host['SECRET'])
 
 time.sleep(10)
 logging.info('Starting scan')
