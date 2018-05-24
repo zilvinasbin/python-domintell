@@ -44,7 +44,8 @@ def get_point_id(module_code, serial_number, channel=0):
     se_no = serial_number.strip()
 
     pid = se_no
-    if channel > 0 and channel < 9:
+    if channel > -1 and channel < 8:
+        channel += 1  # we use 0 based index internally confert to 1 based for domintell
         pid = "{}-{}".format(se_no, channel)
-        
+
     return pid

@@ -36,6 +36,8 @@ from domintell.messages.set_dimmer import StopDimmer
 from domintell.messages.set_dimmer import IncrementDimmer
 from domintell.messages.set_dimmer import DecrementDimmer
 from domintell.messages.set_do import SetDigitalOutputMessage
+from domintell.messages.set_do import SetDigitalOutputOnMessage
+from domintell.messages.set_do import SetDigitalOutputOffMessage
 from domintell.messages.set_do import TogleDigitalOutputMessage
 from domintell.messages.set_temperature import SetTemperatureMessage
 from domintell.messages.set_temperature import SetTemperatureModeMessage

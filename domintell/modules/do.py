@@ -37,10 +37,14 @@ class DBIR01Module(domintell.Module):
             self._controller.send(message)
 
     def turn_on(self, channel):
-        self.set_value(channel, 1)
-
+        if channel < self.number_of_channels():
+            message = domintell.SetDigitalOutputOnMessage(self.get_module_code(), self.get_serial_number(), channel)
+            self._controller.send(message)
+ 
     def turn_off(self, channel):
-        self.set_value(channel, 0)
+        if channel < self.number_of_channels():
+            message = domintell.SetDigitalOutputOffMessage(self.get_module_code(), self.get_serial_number(), channel)
+            self._controller.send(message)
 
     def number_of_channels(self):
         return 8

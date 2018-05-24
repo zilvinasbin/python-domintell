@@ -106,6 +106,7 @@ class DomintellParser(object):
             # normal message
             if module_type in domintell.CommandRegistry:
                 message = domintell.CommandRegistry[module_type]()
+                print('pop [{}:{}]'.format(data, data_string))
                 message.populate(serial_number, data_type, data_string)
                 return message
             else:

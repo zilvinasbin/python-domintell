@@ -38,4 +38,4 @@ class Command(domintell.Message):
         :return: str
         """
         pid = get_point_id(self.moduleType, self.serialNumber, self._channel)
-        return self.command(self.moduleType, pid, self._command, self.data)
+        return self.command(self.moduleType, pid, self._command, self._data)
