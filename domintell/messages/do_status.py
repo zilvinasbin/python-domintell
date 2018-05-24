@@ -34,7 +34,7 @@ class GenericDOStatusMessage(domintell.Message):
         mask = int(dataString[0:2].strip(), 16)
 
         for output in range(0, self.outputCount):
-            self.outputs[output] = 1 if (mask & (output + 1)) else 0
+            self.outputs[output] = 1 if (mask & pow(2, output)) == mask else 0
 
     def to_json(self):
         """

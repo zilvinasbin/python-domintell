@@ -45,5 +45,6 @@ def get_point_id(module_code, serial_number, channel=0):
 
     pid = se_no
     if channel > 0 and channel < 9:
-        pid = se_no + '-' + channel
+        pid = "{}-{}".format(se_no, channel)
+        
     return pid
