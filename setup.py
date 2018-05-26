@@ -12,6 +12,7 @@ setup(name='python-domintell',
       author_email='zilvinas@binis.me',
       description="Python Library for the Domintell protocol",
       long_description=long_description,
+      long_description_content_type="text/markdown",
       packages=['domintell', 'domintell.utils', 'domintell.connections', 'domintell.messages', 'domintell.modules'],
       platforms='any',
      )
