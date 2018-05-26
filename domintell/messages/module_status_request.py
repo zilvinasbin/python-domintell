@@ -14,7 +14,7 @@ class ModuleStatusRequest(domintell.Command):
         domintell.Command.__init__(self, moduleType, serialNumber)
         self.moduleType = moduleType
 
-    def command(self, moduleType, serialNumber, dataType=None, value=None):
-        return "{:3}{:>6}%S".format(moduleType, serialNumber)
+    def command(self):
+        return "{:3}{:>6}%S".format(self.moduleType, self.serialNumber)
 
 domintell.register_command(COMMAND_CODE, ModuleStatusRequest)

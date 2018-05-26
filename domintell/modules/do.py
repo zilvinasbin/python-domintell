@@ -58,7 +58,7 @@ class DBIR01Module(domintell.Module):
                     for callback in self._callbacks[ch]:
                         callback(self.get_value(ch))
 
-class DTRP01Module(domintell.Module):
+class DTRP01Module(DBIR01Module):
     """
     Controll up to 4 trip switches
     """
@@ -67,7 +67,16 @@ class DTRP01Module(domintell.Module):
     def number_of_channels(self):
         return 4
 
-class DTRP02Module(domintell.Module):
+    def _on_message(self, message):
+        if isinstance(message, domintell.DTRPStatusMessage):
+            self._values = message.get_values()
+
+            for ch in range(0, self.number_of_channels()):
+                if ch in self._callbacks:
+                    for callback in self._callbacks[ch]:
+                        callback(self.get_value(ch))
+
+class DTRP02Module(DBIR01Module):
     """
     Controll up to 4 trip switches
     2 x 2shutter command with teleruptors
@@ -79,7 +88,7 @@ class DTRP02Module(domintell.Module):
     def number_of_channels(self):
         return 4
 
-class DTRV01Module(domintell.Module):
+class DTRV01Module(DBIR01Module):
     """
     DTRV01 Module
     4 shutter inverters
@@ -90,8 +99,17 @@ class DTRV01Module(domintell.Module):
     
     def number_of_channels(self):
         return 4
+    
+    def _on_message(self, message):
+        if isinstance(message, domintell.DTRVStatusMessage):
+            self._values = message.get_values()
 
-class DTRVBT01Module(domintell.Module):
+            for ch in range(0, self.number_of_channels()):
+                if ch in self._callbacks:
+                    for callback in self._callbacks[ch]:
+                        callback(self.get_value(ch))        
+
+class DTRVBT01Module(DBIR01Module):
     """
     1 DC shutter command
         0 = UP
@@ -102,7 +120,16 @@ class DTRVBT01Module(domintell.Module):
     def number_of_channels(self):
         return 1
 
-class DFAN01Module(domintell.Module):
+    def _on_message(self, message):
+        if isinstance(message, domintell.DTRVBTStatusMessage):
+            self._values = message.get_values()
+
+            for ch in range(0, self.number_of_channels()):
+                if ch in self._callbacks:
+                    for callback in self._callbacks[ch]:
+                        callback(self.get_value(ch))
+
+class DFAN01Module(DBIR01Module):
     """
     Fan controller
     """
@@ -112,7 +139,7 @@ class DFAN01Module(domintell.Module):
     def number_of_channels(self):
         return 5
 
-class DMR01Module(domintell.Module):
+class DMR01Module(DBIR01Module):
     """
     5 monopolar relays control module
     """
@@ -121,7 +148,17 @@ class DMR01Module(domintell.Module):
     def number_of_channels(self):
         return 5
 
-class DLED01Module(domintell.Module):
+    def _on_message(self, message):
+        if isinstance(message, domintell.DDMRStatusMessage):
+            self._values = message.get_values()
+
+            for ch in range(0, self.number_of_channels()):
+                if ch in self._callbacks:
+                    for callback in self._callbacks[ch]:
+                        callback(self.get_value(ch))
+
+
+class DLED01Module(DBIR01Module):
     """
     4 LED's driver
     """
@@ -129,6 +166,14 @@ class DLED01Module(domintell.Module):
 
     def number_of_channels(self):
         return 4
+
+    def _on_message(self, message):
+        if isinstance(message, domintell.DLEDStatusMessage):
+            self._values = message.get_values()
+            for ch in range(0, self.number_of_channels()):
+                if ch in self._callbacks:
+                    for callback in self._callbacks[ch]:
+                        callback(self.get_value(ch))
 
 
 domintell.register_module_class(DBIR01Module)

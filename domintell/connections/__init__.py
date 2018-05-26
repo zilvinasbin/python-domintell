@@ -177,7 +177,6 @@ class UDPConnection(domintell.DomintellConnection):
         while True:
             (message, callback) = self._write_queue.get(block=True)
             self.logger.info("Sending message to UDP: %s", str(message))
-            print(message.to_string())
             self.logger.debug("Sending controll message:  %s", message.to_string())
             if message.is_binary():
                 self._socket.sendto(message.to_string(), self._addr)

@@ -22,14 +22,32 @@ class Command(domintell.Message):
     def populate(self, serial_number, data_type, data_string):
         pass
 
-    def command(self, module_type, point_id, data_type=None, value=None):
+    def command(self):
+        
+        module_type = self.moduleType
+        serial_number = self.serialNumber
+        channel = self._channel
+        data_type = self._command
+        value = self._data
+
+        point_id = get_point_id(module_type, serial_number, channel)
+
         if data_type == None:
             data_type = ''
+
         if len(data_type) < 1:
             data_type = ''
-        if value != None:
-            return "{:3}{:>8}{}{}".format(module_type, point_id, data_type, value)
-        return "{:3}{:>8}{}".format(module_type, point_id, data_type)
+
+        if channel == None or channel == -1:
+            # module without channel
+            if value != None:
+                return "{:3}{:>6}{}{}".format(module_type, point_id, data_type, value)
+            return "{:3}{:>6}{}".format(module_type, point_id, data_type)
+        else:
+            # normal multichannel module
+            if value != None:
+                return "{:3}{:>8}{}{}".format(module_type, point_id, data_type, value)
+            return "{:3}{:>8}{}".format(module_type, point_id, data_type)
 
     def to_string(self):
         """
@@ -37,5 +55,4 @@ class Command(domintell.Message):
         This method can be overridden in subclasses to include more than just generic attributes
         :return: str
         """
-        pid = get_point_id(self.moduleType, self.serialNumber, self._channel)
-        return self.command(self.moduleType, pid, self._command, self._data)
+        return self.command()

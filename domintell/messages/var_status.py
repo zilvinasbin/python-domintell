@@ -28,10 +28,6 @@ class GenericVARStatusMessage(GenericDIStatusMessage):
             self.populateD(serialNumber, dataType, dataString)
 
     def populateD(self, serialNumber, dataType, dataString):
-        # TODO remove
-        print('D------------------------>')
-        print(dataString)
-        print('<------------------------D')
         assert isinstance(dataString, str)
         self.serialNumber = serialNumber
         self.dataType = dataType
@@ -41,11 +37,6 @@ class GenericVARStatusMessage(GenericDIStatusMessage):
             self.var = 1
 
     def populateA(self, serialNumber, dataType, dataString):
-        # TODO remove
-        # print('A------------------------>')
-        # print(dataString)
-        # print('<------------------------A')
-        # assert isinstance(dataString, str)
         self.serialNumber = serialNumber
         self.dataType = dataType
         self.var = int(dataString[0:2].strip(), 16)

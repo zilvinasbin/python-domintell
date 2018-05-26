@@ -37,13 +37,17 @@ MODULE_DIRECTORY = {
     'TPR': { 'type': 'TPR', 'name': 'Heating Schedule', 'io': 'unk'}
 }
 
-def get_point_id(module_code, serial_number, channel=0):
+def get_point_id(module_code, serial_number, channel=-1):
     # assert isinstance(module_code, str)
     assert isinstance(serial_number, str)
     # hw_id = module_code.strip()
     se_no = serial_number.strip()
 
     pid = se_no
+
+    if not isinstance(channel, int):
+        channel = -1
+        
     if channel > -1 and channel < 8:
         channel += 1  # we use 0 based index internally confert to 1 based for domintell
         pid = "{}-{}".format(se_no, channel)

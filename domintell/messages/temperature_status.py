@@ -4,7 +4,6 @@ Temperature status
 """
 import json
 import domintell
-from decimal import Decimal
 from domintell.utils import DecimalEncoder
 
 TEM_COMMAND_CODE = "TEM"
@@ -49,20 +48,21 @@ class GenericTemperaturetatusMessage(domintell.Message):
 
         data = dataString.split()
 
-        self._current = Decimal(data[0])
-        self._setPoint = Decimal(data[1])
+        self._current = float(data[0])
+        self._set_point = float(data[1])
         self._mode = data[2]
-        self._range = Decimal(data[3])
+        self._range = float(data[3])
 
     def to_json(self):
         """
         :return: str
         """
+        # FIXME
         json_dict = self.to_json_basic()
-        json_dict['current'] = DecimalEncoder().encode(self._current)
+        json_dict['current'] = self._current
         json_dict['mode'] = self._mode
-        json_dict['set_point'] = DecimalEncoder().encode(self._set_point)
-        json_dict['range'] = DecimalEncoder().encode(self._range)
+        json_dict['set_point'] = self._set_point
+        json_dict['range'] = self._range
         return json.dumps(json_dict)
 
 

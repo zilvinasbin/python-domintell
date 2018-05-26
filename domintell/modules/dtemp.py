@@ -4,6 +4,12 @@
 import domintell
 import domintell.messages
 
+DOM_ABSENSE = 1
+DOM_AUTO = 2
+DOM_COMFORT = 5
+DOM_FROST = 6
+
+
 class DTEM01Module(domintell.Module):
     """
     DTEM01 - temperature controll module (1 channels)    
@@ -66,7 +72,8 @@ class DTEM01Module(domintell.Module):
         if isinstance(message, domintell.TE1TemperaturetatusMessage):
             self._temperature = message.get_temperature()
             self._set_point = message.get_set_point()
-            self._mode = message.get_mode()
+            self._mode = self._mode_text_to_number(message.get_mode())
+            print("mode", self._mode)
             self._range = message.get_range()
 
             for ch in range(0, self.number_of_channels()):
@@ -74,11 +81,33 @@ class DTEM01Module(domintell.Module):
                     for callback in self._callbacks[ch]:
                         callback(self._temperature, self._mode, self._set_point, self._range)
 
+    def _mode_text_to_number(self, mode):
+        if mode == 'AUTO':
+            return DOM_AUTO 
+        elif mode == 'ABSENCE':
+            return DOM_ABSENSE
+        elif mode == 'COMFORT':
+            return DOM_COMFORT
+        elif mode == 'FROST':
+            return DOM_FROST
+        return DOM_AUTO
+
 class DTEM02Module(domintell.Module):
     """
     DTEM02 -  controll module (1 channels)    
     """
     COMMAND_CODE = 'TE2'
+    def _on_message(self, message):
+        if isinstance(message, domintell.TE2TemperaturetatusMessage):
+            self._temperature = message.get_temperature()
+            self._set_point = message.get_set_point()
+            self._mode = message.get_mode()
+            self._range = message.get_range()
+
+            for ch in range(0, self.number_of_channels()):
+                if ch in self._callbacks:
+                    for callback in self._callbacks[ch]:
+                        callback(self._temperature, self._mode, self._set_point, self._range)
 
 domintell.register_module_class(DTEM01Module)
 domintell.register_module_class(DTEM02Module)

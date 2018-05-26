@@ -100,13 +100,9 @@ class DomintellParser(object):
                 # some info message
                 return domintell.InfoMessage(module_type, data)
 
-            # print(module_type)
-            # print(data[7:3])
-
             # normal message
             if module_type in domintell.CommandRegistry:
                 message = domintell.CommandRegistry[module_type]()
-                print('pop [{}:{}]'.format(data, data_string))
                 message.populate(serial_number, data_type, data_string)
                 return message
             else:

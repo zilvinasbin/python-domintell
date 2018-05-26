@@ -11,5 +11,5 @@ class AppInfoRequest(domintell.Command):
     def __init__(self):
         domintell.Command.__init__(self, "_APPINFO_", "_APPINFO_")
 
-    def command(self, moduleType, serialNumber, dataType=None, value=None):
+    def command(self):
         return "APPINFO"

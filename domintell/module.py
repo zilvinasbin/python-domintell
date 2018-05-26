@@ -154,7 +154,6 @@ class Module(object):
     
     def _load(self):
         message = domintell.ModuleStatusRequest(self.get_module_code(), self._serial_number)
-        message.channels = list(range(0, self.number_of_channels()))
         self._controller.send(message)
 
 

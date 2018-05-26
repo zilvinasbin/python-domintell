@@ -4,7 +4,7 @@ with open('README.md') as file:
     long_description = file.read()
 
 setup(name='python-domintell',
-      version='0.0.4',
+      version='0.0.5',
       url='https://github.com/shamanenas/python-domintell',
       license='MIT',
       author='Zilvinas Binisevicius',

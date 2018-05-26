@@ -30,9 +30,6 @@ class GenericDIStatusMessage(domintell.Message):
         """
         self.serialNumber = serialNumber
         self.dataType = dataType
-
-        print(dataString)
-
         mask = int(dataString[0:2].strip(), 16)
 
         for input in range(0, self.inputCount):

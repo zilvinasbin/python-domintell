@@ -2,13 +2,21 @@
 :author: Thomas Delaet <thomas@delaet.org>
 """
 # pylint: disable-msg=C0301
+# appifo scan messages system messages
+from domintell.messages.appinfo_request import AppInfoRequest
+from domintell.messages.module_info import ModuleInfoMessage
+from domintell.messages.ping import Ping
+from domintell.messages.login_request import LoginRequest
+from domintell.messages.info import InfoMessage
+from domintell.messages.control import ControllMessage
+# status messages
 from domintell.messages.ai_status import GenericAIStatusMessage
 from domintell.messages.ao_status import GenericAOStatusMessage
 from domintell.messages.do_status import GenericDOStatusMessage
 from domintell.messages.di_status import GenericDIStatusMessage
 from domintell.messages.dio_status import GenericDIOStatusMessage
-from domintell.messages.appinfo_request import AppInfoRequest
 from domintell.messages.dbir_status import DBIRStatusMessage
+from domintell.messages.dmr_status import DDMRStatusMessage
 from domintell.messages.ddim_status import DDIMStatusMessage
 from domintell.messages.din10v_status import DIN10VStatusMessage
 from domintell.messages.dism_status import DISM4StatusMessage
@@ -23,8 +31,8 @@ from domintell.messages.dtrv_status import DTRVStatusMessage
 from domintell.messages.dtrv_status import DTRVBTStatusMessage
 from domintell.messages.dtsc_status import DTSCStatusMessage
 from domintell.messages.module_status_request import ModuleStatusRequest
-from domintell.messages.module_info import ModuleInfoMessage
-from domintell.messages.ping import Ping
+from domintell.messages.dled_status  import DLEDStatusMessage
+# Command messages
 from domintell.messages.set_ao import SetAnalogOutputMessage
 from domintell.messages.set_di import DigitalShortPush
 from domintell.messages.set_di import DigitalLongPush
@@ -50,6 +58,3 @@ from domintell.messages.temperature_status import TE1TemperaturetatusMessage
 from domintell.messages.temperature_status import TE2TemperaturetatusMessage
 from domintell.messages.var_status import VARStatusMessage
 from domintell.messages.var_status import SYSStatusMessage
-from domintell.messages.login_request import LoginRequest
-from domintell.messages.info import InfoMessage
-from domintell.messages.control import ControllMessage

@@ -11,7 +11,7 @@ import os, sys
 from config import host
 
 def _on_message(message):
-    print('received message')
+    print('received message', message)
     print(message)
 
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)

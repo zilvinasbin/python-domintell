@@ -91,7 +91,25 @@ class DISM08Module(GenericDISM0xModule):
                 if ch in self._callbacks:
                     for callback in self._callbacks[ch]:
                         callback(self.get_value(ch))
+                    
 
+class DMOV01Module(GenericDISM0xModule):
+
+    COMMAND_CODE = 'DET'
+
+    def number_of_channels(self):
+        return 1
+
+    def _on_message(self, message):
+        if isinstance(message, domintell.DMOVStatusMessage):
+            self._values = message.get_values()
+
+            for ch in range(0, self.number_of_channels()):
+                if ch in self._callbacks:
+                    for callback in self._callbacks[ch]:
+                        callback(self.get_value(ch))
+        
 
 domintell.register_module_class(DISM04Module)
 domintell.register_module_class(DISM08Module)
+domintell.register_module_class(DMOV01Module)
