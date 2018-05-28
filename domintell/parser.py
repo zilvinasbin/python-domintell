@@ -105,7 +105,7 @@ class DomintellParser(object):
                     return domintell.SessionOpenedMessage(data=data)
                 elif data[0:24] == MSG_SESSION_CLOSED:
                     return domintell.SessionClosedMessage(data=data)
-                elif data[0:24] == MSG_SESSION_TIMEOUT:
+                elif data[0:25] == MSG_SESSION_TIMEOUT:
                     return domintell.SessionTimeoutMessage(data=data)
                 return domintell.InfoMessage(module_type, data)
 
