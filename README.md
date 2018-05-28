@@ -4,7 +4,7 @@ This library was created to support Domintell protocol in [home assisstant](http
 
 It is currently being used by the Domintell component in [home assisstant](http://home-assistant.io) but can also be used indepenently.
 
-The latest version of the library is *0.0.9* and it is published as a python package on [pypi](https://pypi.python.org/pypi/python-domintell)
+The latest version of the library is *0.0.10* and it is published as a python package on [pypi](https://pypi.python.org/pypi/python-domintell)
 
 API documentation is not yet available.
 
