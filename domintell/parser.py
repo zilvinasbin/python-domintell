@@ -10,8 +10,9 @@ import domintell
 
 NORMAL_MODE = 0
 APP_INFO_MODE = 1
-MSG_SESSION_OPENED = 'INFO:Session opened:INFO'
-MSG_SESSION_CLOSED = 'INFO:Session closed:INFO'
+MSG_SESSION_OPENED =  'INFO:Session opened:INFO'
+MSG_SESSION_CLOSED =  'INFO:Session closed:INFO'
+MSG_SESSION_TIMEOUT = 'INFO:Session timeout:INFO'
 
 class ParserError(Exception):
     """
@@ -104,6 +105,8 @@ class DomintellParser(object):
                     return domintell.SessionOpenedMessage(data=data)
                 elif data[0:24] == MSG_SESSION_CLOSED:
                     return domintell.SessionClosedMessage(data=data)
+                elif data[0:24] == MSG_SESSION_TIMEOUT:
+                    return domintell.SessionTimeoutMessage(data=data)
                 return domintell.InfoMessage(module_type, data)
 
             # normal message

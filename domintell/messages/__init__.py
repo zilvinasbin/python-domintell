@@ -11,6 +11,7 @@ from domintell.messages.info import InfoMessage
 from domintell.messages.control import ControllMessage
 from domintell.messages.session_closed import SessionClosedMessage
 from domintell.messages.session_opened import SessionOpenedMessage
+from domintell.messages.session_timeout import SessionTimeoutMessage
 # status messages
 from domintell.messages.ai_status import GenericAIStatusMessage
 from domintell.messages.ao_status import GenericAOStatusMessage
