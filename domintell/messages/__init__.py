@@ -2,13 +2,15 @@
 :author: Thomas Delaet <thomas@delaet.org>
 """
 # pylint: disable-msg=C0301
-# appifo scan messages system messages
+# appifo scan messages and system messages
 from domintell.messages.appinfo_request import AppInfoRequest
 from domintell.messages.module_info import ModuleInfoMessage
 from domintell.messages.ping import Ping
 from domintell.messages.login_request import LoginRequest
 from domintell.messages.info import InfoMessage
 from domintell.messages.control import ControllMessage
+from domintell.messages.session_closed import SessionClosedMessage
+from domintell.messages.session_opened import SessionOpenedMessage
 # status messages
 from domintell.messages.ai_status import GenericAIStatusMessage
 from domintell.messages.ao_status import GenericAOStatusMessage

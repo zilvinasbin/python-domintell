@@ -10,6 +10,7 @@ import threading
 import logging
 from queue import Queue
 import domintell
+import domintell.messages
 import serial
 import serial.threaded
 import socket
@@ -118,11 +119,13 @@ class UDPConnection(domintell.DomintellConnection):
     """
     SLEEP_TIME = 60 / 1000
 
-    def __init__(self, device, controller=None):
+    def __init__(self, device, controller=None, ping_interval=0):
         domintell.DomintellConnection.__init__(self)
         self.logger = logging.getLogger('domintell')
         self._device = device
         self.controller = controller
+        self.ping_interval = ping_interval
+
         # get the address from a <host>:<port> format
         addr = device.split(':')
         self._addr = (addr[0], int(addr[1]))
@@ -145,6 +148,12 @@ class UDPConnection(domintell.DomintellConnection):
                                                "domintell-connection-writer", (), {})
         self._write_process.daemon = True
         self._write_process.start()
+
+        # build a ping thread
+        self._ping_process = threading.Thread(None, self.ping_daemon,
+                                            "domintell-ping-writer", (), {})
+        self._ping_process.daemon = True
+
 
     def stop(self):
         """Close UDP."""
@@ -185,3 +194,23 @@ class UDPConnection(domintell.DomintellConnection):
             time.sleep(self.SLEEP_TIME)
             if callback:
                 callback()
+    
+    def ping_daemon(self):
+        """Put ping message into write thread every 60 sec"""
+        s = self.ping_interval
+        while True:
+            p = domintell.messages.Ping()
+            self.send(p)
+            time.sleep(s)
+
+    def start_ping(self, interval=-1):
+        """
+        Start sending PING message to DETH02 every minute.
+        DETH02 will end Login 'session' if no messages received 
+        in predefined interval (10mins default)
+        """
+        if interval > -1:
+            self.ping_interval = interval
+
+        if self.ping_interval > 0:
+            self._ping_process.start()

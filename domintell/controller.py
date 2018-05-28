@@ -178,3 +178,11 @@ class Controller(object):
         Stop domintell
         """
         self.connection.stop()
+
+    def start_ping(self, ping_interval):
+        """
+        Start ping service
+            :param self: 
+            :param ping_interval: 
+        """
+        self.connection.start_ping(ping_interval)

@@ -54,35 +54,35 @@ You can install the library with pip (*pip install python-domintell*) or by chec
 
 The following Domitell modules are currently supported by this library:
 
-| Module name | Description | Status | Comments |
-| ----------- | ----------- | ------ | -------- |
-| DISM4 | Control of 4 inputs (buttons) | SUPPORTED | All messages are supported |
-| DISM8 | Control of 8 inputs (buttons) | SUPPORTED | All messages are supported |
-| DPBU01 | 1 button module | SUPPORTED | All messages are supported |
-| DPBU02 | 2 button module | SUPPORTED | All messages are supported |
-| DPBU04 | 4 button module | SUPPORTED | All messages are supported |
-| DPBU06 | 6 button module | SUPPORTED | All messages are supported |
-| DBIR01 | 8 relay output module | SUPPORTED | All messages are supported |
-| DTRP01 | Output card for the control of up to 4 trip switches | SUPPORTED | All messages are supported |
-| DTRP02 | Output card for the control of 2 x 2 inverted trip switches |SUPPORTED | All messages are supported |
-| DDIM01 | Control module for up to 8 dimmers | SUPPORTED | All messages are supported |
-| DTEM01 | Temperature sensor module. Allows the connection of the temperature sensor | SUPPORTED | Only basic messages |
-| DTEM02 | Temperature sensor module. Allows the connection of the temperature sensor | SUPPORTED | Only basic messages |
-| DDIR01 | Infrared Sensor | NOT SUPPORTED | No plans to support |
-| DTSC0x | TFT back-lit color touchscreen | SUPPORTED | Only temperature messages are supported |
-| DMOV01 | Movement sensor | SUPPORTED | All messages are supported |
-| DLCD01 | LCD | NOT SUPPORTED |  |
-| DTRV01 | 4 outputs control module. For the control of shutters, valves, motors, etc | SUPPORTED | All messages are supported |
-| DLED01 | 4 outputs led control module | SUPPORTED | All messages are supported |
-| DTRVBT01 | Single output card controlling motors, valves, shutters or Velux with low tension between 12 to 24Vdc | SUPPORTED | All messages are supported |
-| DAMPLI01 |  4 zones stereo audio amplifi er  | NOT SUPPORTED | No plans to implement |
-| VAR | Variable | SUPPORTED | All messages are supported |
-| SYS | System variable | SUPPORTED | All messages are supported |
-| DOUT10V01 | 0 - 10Vdc output module | SUPPORTED | All messages are supported |
-| DLCD01 | LCD panel | NOT SUPPORTED | |
-| DFAN01 | Fan coil controller | NOT SUPPORTED | |
-| DMR01 | Output card with 5 x 250 V/3 A monopolar relays. | SUPPORTED | All messages are supported |
-| DIN10V01 | 0 - 10Vdc input module | NOT SUPPORTED ||
+| Module name | Description | Status | Comments | Using everyday? |
+| ----------- | ----------- | ------ | -------- | --------------- |
+| DISM4 | Control of 4 inputs (buttons) | SUPPORTED | All messages are supported | Yes |
+| DISM8 | Control of 8 inputs (buttons) | SUPPORTED | All messages are supported | Yes |
+| DPBU01 | 1 button module | SUPPORTED | All messages are supported | No |
+| DPBU02 | 2 button module | SUPPORTED | All messages are supported | No |
+| DPBU04 | 4 button module | SUPPORTED | All messages are supported | Rarely |
+| DPBU06 | 6 button module | SUPPORTED | All messages are supported | No |
+| DBIR01 | 8 relay output module | SUPPORTED | All messages are supported | Yes |
+| DTRP01 | Output card for the control of up to 4 trip switches | SUPPORTED | All messages are supported | Yes |
+| DTRP02 | Output card for the control of 2 x 2 inverted trip switches |SUPPORTED | All messages are supported | No |
+| DDIM01 | Control module for up to 8 dimmers | SUPPORTED | All messages are supported | Yes |
+| DTEM01 | Temperature sensor module. Allows the connection of the temperature sensor | SUPPORTED | Only basic messages | Yes |
+| DTEM02 | Temperature sensor module. Allows the connection of the temperature sensor | SUPPORTED | Only basic messages | Yes |
+| DDIR01 | Infrared Sensor | NOT SUPPORTED | No plans to support | No |
+| DTSC0x | TFT back-lit color touchscreen | SUPPORTED | Only temperature messages are supported | Yes |
+| DMOV01 | Movement sensor | SUPPORTED | All messages are supported | Yes |
+| DLCD01 | LCD | NOT SUPPORTED |  | No |
+| DTRV01 | 4 outputs control module. For the control of shutters, valves, motors, etc | SUPPORTED | All messages are supported | No |
+| DLED01 | 4 outputs led control module | SUPPORTED | All messages are supported | Yes |
+| DTRVBT01 | Single output card controlling motors, valves, shutters or Velux with low tension between 12 to 24Vdc | SUPPORTED | All messages are supported | No |
+| DAMPLI01 |  4 zones stereo audio amplifi er  | NOT SUPPORTED | No plans to implement | No |
+| VAR | Variable | SUPPORTED | All messages are supported | No|
+| SYS | System variable | SUPPORTED | All messages are supported | No |
+| DOUT10V01 | 0 - 10Vdc output module | SUPPORTED | All messages are supported | No |
+| DLCD01 | LCD panel | NOT SUPPORTED | | No |
+| DFAN01 | Fan coil controller | NOT SUPPORTED | | No |
+| DMR01 | Output card with 5 x 250 V/3 A monopolar relays. | SUPPORTED | All messages are supported | Yes |
+| DIN10V01 | 0 - 10Vdc input module | NOT SUPPORTED || No |
 
 # Adding support for other modules
 
