@@ -213,4 +213,5 @@ class UDPConnection(domintell.DomintellConnection):
             self.ping_interval = interval
 
         if self.ping_interval > 0:
-            self._ping_process.start()
+            if not self._ping_process.is_alive():
+                self._ping_process.start()
