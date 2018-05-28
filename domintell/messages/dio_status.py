@@ -5,7 +5,7 @@ DIO (Input / Output) status (to be inherited)
 import json
 import domintell
 
-DIO_COMMAND_CODE = "DIO)"
+DIO_COMMAND_CODE = "DIO"
 
 class GenericDIOStatusMessage(domintell.Message):
     """
@@ -18,12 +18,14 @@ class GenericDIOStatusMessage(domintell.Message):
         self.pinCount = pinCount
         self.serialNumber = None
         self.dataType = None
-        self._inputs = []
-        self._outputs = []
+        self._inputs = {}
+        self._outputs = {}
+
         for i in range(0, self.pinCount):
             self._inputs[i] = 0
-            self._outputs[i] = 0
 
+        for i in range(0, self.pinCount):
+            self._outputs[i] = 0
     
     def get_inputs(self):
         return self._inputs
