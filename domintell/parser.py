@@ -115,7 +115,7 @@ class DomintellParser(object):
                 message.populate(serial_number, data_type, data_string)
                 return message
             else:
-                self.logger.warning("Unrecognized message [%s]", str(module_type))
+                self.logger.debug("Unrecognized message [%s]", str(module_type))
 
     def contains_all(self, str, set):
         return 0 not in [c in str for c in set]
