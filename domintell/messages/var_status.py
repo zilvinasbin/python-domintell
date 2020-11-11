@@ -20,6 +20,7 @@ class GenericVARStatusMessage(GenericDIStatusMessage):
         self.serialNumber = None
         self.dataType = None
         self.var = 0
+        self.inputs = {}
 
     def populate(self, serialNumber, dataType, dataString):
         if dataType == "O":
@@ -35,11 +36,13 @@ class GenericVARStatusMessage(GenericDIStatusMessage):
             self.var = 0
         else:
             self.var = 1
+        self.inputs[0] = self.var
 
     def populateA(self, serialNumber, dataType, dataString):
         self.serialNumber = serialNumber
         self.dataType = dataType
         self.var = int(dataString[0:2].strip(), 16)
+        self.inputs[0] = self.var
 
     def to_json(self):
         """
@@ -48,9 +51,6 @@ class GenericVARStatusMessage(GenericDIStatusMessage):
         json_dict = self.to_json_basic()
         json_dict['var'] = self.var
         return json.dumps(json_dict)
-
-    def get_values(self):
-        return self.var
 
 
 class VARStatusMessage(GenericVARStatusMessage):
