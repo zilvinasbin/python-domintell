@@ -1,6 +1,10 @@
 """
 Dimmer control module DDIM01
-Controlls up to 8 dimmers DD500, DD750, DD1000 and DD10V
+Controlls:
+  DISM04
+  DISM08
+  DMOV01
+  VAR - Binary version only
 
 :author: Zilvinas Binisevicius <zilvinas@binis.me>
 """
@@ -110,6 +114,25 @@ class DMOV01Module(GenericDISM0xModule):
                         callback(self.get_value(ch))
         
 
+class DVARModule(GenericDISM0xModule):
+    """
+    4 LED's driver
+    """
+    COMMAND_CODE = 'VAR'
+
+    def number_of_channels(self):
+        return 1
+
+    def _on_message(self, message):
+        if isinstance(message, domintell.VARStatusMessage):
+            self._values = message.get_values()
+            
+            for ch in range(0, self.number_of_channels()):
+                if ch in self._callbacks:
+                    for callback in self._callbacks[ch]:
+                        callback(self.get_value(ch))
+
 domintell.register_module_class(DISM04Module)
 domintell.register_module_class(DISM08Module)
 domintell.register_module_class(DMOV01Module)
+domintell.register_module_class(DVARModule)
