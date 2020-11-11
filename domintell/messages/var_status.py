@@ -49,6 +49,8 @@ class GenericVARStatusMessage(GenericDIStatusMessage):
         json_dict['var'] = self.var
         return json.dumps(json_dict)
 
+    def get_values(self):
+        return self.var
 
 
 class VARStatusMessage(GenericVARStatusMessage):
