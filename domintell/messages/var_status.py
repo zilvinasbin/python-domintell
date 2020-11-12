@@ -13,20 +13,24 @@ SYS_COMMAND_CODE = "SYS"
 
 class GenericVARStatusMessage(GenericDIStatusMessage):
     """
-    DISM4 module status
+    Generic VAR module status
     """
     def __init__(self, command_code=VAR_COMMAND_CODE, address=None):
         GenericDIStatusMessage.__init__(self, command_code, 1)
+        self.moduleType = command_code
         self.serialNumber = None
         self.dataType = None
         self.var = 0
         self.inputs = {}
 
     def populate(self, serialNumber, dataType, dataString):
+        # Since dimintell can have the same numbers for VAR and SYS
+        # we can not identify variable by serialNumber,
+        # so we prepend moduleType/command_code in the front
         if dataType == "O":
-            self.populateA(serialNumber, dataType, dataString)
+            self.populateA(self.moduleType + serialNumber, dataType, dataString)
         elif dataType == "D":
-            self.populateD(serialNumber, dataType, dataString)
+            self.populateD(self.moduleType + serialNumber, dataType, dataString)
 
     def populateD(self, serialNumber, dataType, dataString):
         assert isinstance(dataString, str)
