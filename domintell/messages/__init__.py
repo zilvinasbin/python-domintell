@@ -50,6 +50,9 @@ from domintell.messages.set_do import SetDigitalOutputMessage
 from domintell.messages.set_do import SetDigitalOutputOnMessage
 from domintell.messages.set_do import SetDigitalOutputOffMessage
 from domintell.messages.set_do import TogleDigitalOutputMessage
+from domintell.messages.set_do import SetDigitalOutputOpenMessage
+from domintell.messages.set_do import SetDigitalOutputCloseMessage
+from domintell.messages.set_do import SetDigitalOutputStopMessage
 from domintell.messages.set_temperature import SetTemperatureMessage
 from domintell.messages.set_temperature import SetTemperatureModeMessage
 from domintell.messages.set_temperature import SetTemperatureSetPointMessage
