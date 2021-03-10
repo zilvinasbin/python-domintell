@@ -52,3 +52,9 @@ class GenericDOStatusMessage(domintell.Message):
     
     def is_on(self, channel):
         return self.outputs[channel - 1] == 1
+
+    def is_opening(self, channel):
+        return self.outputs[channel*2 - 2] == 1
+
+    def is_closing(self, channel):
+        return self.outputs[channel*2 - 1] == 1
