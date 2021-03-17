@@ -100,6 +100,39 @@ class DTRV01Module(DBIR01Module):
     def number_of_channels(self):
         return 4
     
+    def __init__(self, serial_number, controller):
+        domintell.Module.__init__(self, serial_number, controller)
+
+    def is_opening(self, channel):
+        if channel < self.number_of_channels():
+            if self._values[channel*2] > 0:
+                return True
+        return False
+
+    def is_closing(self, channel):
+        if channel < self.number_of_channels():
+            if self._values[channel*2 + 1] > 0:
+                return True
+        return False
+
+    def is_closed(self, channel):
+        return None
+
+    def close_cover(self, channel):
+        if channel < self.number_of_channels():
+            message = domintell.SetDigitalOutputCloseMessage(self.get_module_code(), self.get_serial_number(), channel)
+            self._controller.send(message)
+
+    def open_cover(self, channel):
+        if channel < self.number_of_channels():
+            message = domintell.SetDigitalOutputOpenMessage(self.get_module_code(), self.get_serial_number(), channel)
+            self._controller.send(message)
+
+    def stop_cover(self, channel):
+        if channel < self.number_of_channels():
+            message = domintell.SetDigitalOutputStopMessage(self.get_module_code(), self.get_serial_number(), channel)
+            self._controller.send(message)
+
     def _on_message(self, message):
         if isinstance(message, domintell.DTRVStatusMessage):
             self._values = message.get_values()

@@ -22,3 +22,15 @@ class TogleDigitalOutputMessage(domintell.Command):
     def __init__(self, moduleType, serialNumber, channel):
         domintell.Command.__init__(self, moduleType, serialNumber, channel, "")
 
+""" Cover support added """
+class SetDigitalOutputOpenMessage(domintell.Command):
+    def __init__(self, moduleType, serialNumber, channel):
+        domintell.Command.__init__(self, moduleType, serialNumber, channel*2, "%I")
+
+class SetDigitalOutputCloseMessage(domintell.Command):
+    def __init__(self, moduleType, serialNumber, channel):
+        domintell.Command.__init__(self, moduleType, serialNumber, channel*2 + 1, "%I")
+
+class SetDigitalOutputStopMessage(domintell.Command):
+    def __init__(self, moduleType, serialNumber, channel):
+        domintell.Command.__init__(self, moduleType, serialNumber, channel*2, "%O")
